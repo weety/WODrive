@@ -1,0 +1,120 @@
+from building import *
+import os
+import subprocess
+
+cwd  = GetCurrentDir()
+
+if not os.path.exists(cwd+'/autogen'):
+    os.mkdir(cwd+'/autogen')
+
+cmdline = 'python ' + cwd + '/../../tools/version.py --output ' + cwd + '/autogen/version.c'
+try:
+    proc = subprocess.Popen(cmdline, shell=False)
+except Exception as e:
+    print('Error in calling command:' + cmdline.split(' ')[0])
+    print('Exception: ' + os.strerror(e.errno))
+    if (os.strerror(e.errno) == "No such file or directory"):
+        print ("\nPlease check Version autogen PATH setting.\n")
+
+    exit(-1)
+finally:
+    pass
+
+cmdline = 'python ' + cwd + '/interface_generator_stub.py --definitions ' + cwd + '/odrive-interface.yaml --template ' + \
+        cwd + '/fibre/cpp/interfaces_template.j2 --output ' + cwd + '/autogen/interfaces.hpp'
+try:
+    proc = subprocess.Popen(cmdline, shell=False)
+except Exception as e:
+    print('Error in calling command:' + cmdline.split(' ')[0])
+    print('Exception: ' + os.strerror(e.errno))
+    if (os.strerror(e.errno) == "No such file or directory"):
+        print ("\nPlease check inerface autogen PATH setting.\n")
+
+    exit(-1)
+finally:
+    pass
+
+cmdline = 'python ' + cwd + '/interface_generator_stub.py --definitions ' + cwd + '/odrive-interface.yaml --template ' + \
+        cwd + '/fibre/cpp/function_stubs_template.j2 --output ' + cwd + '/autogen/function_stubs.hpp'
+try:
+    proc = subprocess.Popen(cmdline, shell=False)
+except Exception as e:
+    print('Error in calling command:' + cmdline.split(' ')[0])
+    print('Exception: ' + os.strerror(e.errno))
+    if (os.strerror(e.errno) == "No such file or directory"):
+        print ("\nPlease check function stubs autogen PATH setting.\n")
+
+    exit(-1)
+finally:
+    pass
+
+cmdline = 'python ' + cwd + '/interface_generator_stub.py --definitions ' + cwd + \
+        '/odrive-interface.yaml --generate-endpoints ODrive --template ' + \
+        cwd + '/fibre/cpp/endpoints_template.j2 --output ' + cwd + '/autogen/endpoints.hpp'
+try:
+    proc = subprocess.Popen(cmdline, shell=False)
+except Exception as e:
+    print('Error in calling command:' + cmdline.split(' ')[0])
+    print('Exception: ' + os.strerror(e.errno))
+    if (os.strerror(e.errno) == "No such file or directory"):
+        print ("\nPlease check endpoints autogen PATH setting.\n")
+
+    exit(-1)
+finally:
+    pass
+
+cmdline = 'python ' + cwd + '/interface_generator_stub.py --definitions ' + cwd + '/odrive-interface.yaml --template ' + \
+        cwd + '/fibre/cpp/type_info_template.j2 --output ' + cwd + '/autogen/type_info.hpp'
+try:
+    proc = subprocess.Popen(cmdline, shell=False)
+except Exception as e:
+    print('Error in calling command:' + cmdline.split(' ')[0])
+    print('Exception: ' + os.strerror(e.errno))
+    if (os.strerror(e.errno) == "No such file or directory"):
+        print ("\nPlease check type info autogen PATH setting.\n")
+
+    exit(-1)
+finally:
+    pass
+
+src = Split('''
+Drivers/DRV8301/drv8301.c
+MotorControl/utils.cpp
+MotorControl/arm_sin_f32.c
+MotorControl/arm_cos_f32.c
+MotorControl/low_level.cpp
+MotorControl/nvm.c
+MotorControl/axis.cpp
+MotorControl/motor.cpp
+MotorControl/thermistor.cpp
+MotorControl/encoder.cpp
+MotorControl/endstop.cpp
+MotorControl/controller.cpp
+MotorControl/sensorless_estimator.cpp
+MotorControl/trapTraj.cpp
+MotorControl/main.cpp
+communication/can_simple.cpp
+communication/communication.cpp
+communication/ascii_protocol.cpp
+communication/interface_uart.cpp
+communication/interface_usb.cpp
+communication/interface_can.cpp
+communication/interface_i2c.cpp
+fibre/cpp/protocol.cpp
+autogen/version.c
+HMI/hmi.cpp
+HMI/LCD/ST7789.c
+HMI/LCD/lcd.cpp
+''')
+
+CPPPATH = [cwd + '/Drivers/DRV8301']
+CPPPATH += [cwd + '/MotorControl']
+CPPPATH += [cwd + '/fibre/cpp/include']
+CPPPATH += [cwd + '/HMI']
+CPPPATH += [cwd + '/HMI/LCD']
+CPPPATH += [cwd]
+
+group = DefineGroup('WODrive', src, depend = [''], CPPPATH = CPPPATH)
+
+Return('group')
+

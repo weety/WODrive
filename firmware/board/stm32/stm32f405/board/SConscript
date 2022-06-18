@@ -10,10 +10,30 @@ cwd = GetCurrentDir()
 src = Split('''
 board.c
 CubeMX_Config/Src/stm32f4xx_hal_msp.c
+CubeMX_Config/Src/adc.c
+CubeMX_Config/Src/can.c
+CubeMX_Config/Src/dma.c
+CubeMX_Config/Src/gpio.c
+CubeMX_Config/Src/i2c.c
+CubeMX_Config/Src/spi.c
+CubeMX_Config/Src/tim.c
+CubeMX_Config/Src/usb_device.c
+CubeMX_Config/Src/usbd_cdc_if.c
+CubeMX_Config/Src/usbd_conf.c
+CubeMX_Config/Src/usbd_desc.c
+''')
+
+src += Split('''
+CubeMX_Config/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c
+CubeMX_Config/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
+CubeMX_Config/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
+CubeMX_Config/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
 ''')
 
 path =  [cwd]
 path += [cwd + '/CubeMX_Config/Inc']
+path += [cwd + '/CubeMX_Config/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc',
+        cwd + '/CubeMX_Config/Middlewares/ST/STM32_USB_Device_Library/Core/Inc']
 
 startup_path_prefix = SDK_LIB
 

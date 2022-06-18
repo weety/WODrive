@@ -30,6 +30,7 @@ SECTIONS
         *(.glue_7)
         *(.glue_7t)
         *(.gnu.linkonce.t*)
+        *(.eh_frame)
 
         /* section information for finsh shell */
         . = ALIGN(4);

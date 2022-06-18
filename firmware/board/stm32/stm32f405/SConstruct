@@ -31,7 +31,7 @@ env.PrependENVPath('PATH', rtconfig.EXEC_PATH)
 if rtconfig.PLATFORM == 'iar':
     env.Replace(CCCOM = ['$CC $CFLAGS $CPPFLAGS $_CPPDEFFLAGS $_CPPINCFLAGS -o $TARGET $SOURCES'])
     env.Replace(ARFLAGS = [''])
-    env.Replace(LINKCOM = env["LINKCOM"] + ' --map rtthread.map')
+    env.Replace(LINKCOM = env["LINKCOM"] + ' --map WODrive.map')
 
 Export('RTT_ROOT')
 Export('rtconfig')
@@ -51,12 +51,17 @@ objs = PrepareBuilding(env, RTT_ROOT, has_libcpu=False)
 
 stm32_library = 'STM32F4xx_HAL'
 rtconfig.BSP_LIBRARY_TYPE = stm32_library
+build_vdir = 'build'
 
 # include libraries
-objs.extend(SConscript(os.path.join(libraries_path_prefix, stm32_library, 'SConscript')))
+objs.extend(SConscript(os.path.join(libraries_path_prefix, stm32_library, 'SConscript'), variant_dir=build_vdir + '/' + stm32_library, duplicate=0))
 
 # include drivers
-objs.extend(SConscript(os.path.join(libraries_path_prefix, 'HAL_Drivers', 'SConscript')))
+objs.extend(SConscript(os.path.join(libraries_path_prefix, 'HAL_Drivers', 'SConscript'), variant_dir=build_vdir + '/HAL_Drivers', duplicate=0))
+
+WODRIVE_ROOT = os.path.normpath(os.getcwd() + '/../../..')
+# include WODrive
+objs.extend(SConscript(os.path.join(WODRIVE_ROOT, 'src', 'SConscript'), variant_dir=build_vdir + '/wodrive', duplicate=0))
 
 # make a building
 DoBuilding(TARGET, objs)

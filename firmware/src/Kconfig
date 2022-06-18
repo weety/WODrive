@@ -1,0 +1,77 @@
+menu "WODrive BOARD config"
+
+    choice
+        prompt "Board version config"
+        default BOARD_VERSION3_5_24V
+
+        config BOARD_VERSION3_5_24V
+            bool "v3.5-24V"
+
+        config BOARD_VERSION3_5_48V
+            bool "v3.5-48V"
+
+        config BOARD_VERSION3_6_24V
+            bool "v3.6-24V"
+
+        config BOARD_VERSION3_6_56V
+            bool "v3.6-56V"
+
+    endchoice
+
+    config HW_VERSION_MAJOR
+        int
+        default 3 if (BOARD_VERSION3_5_24V || BOARD_VERSION3_5_48V || BOARD_VERSION3_6_24V || BOARD_VERSION3_6_56V)
+
+    config HW_VERSION_MINOR
+        int
+        default 5 if (BOARD_VERSION3_5_24V || BOARD_VERSION3_5_48V)
+        default 6 if (BOARD_VERSION3_6_24V || BOARD_VERSION3_6_56V)
+
+    config HW_VERSION_VOLTAGE
+        int
+        default 24 if (BOARD_VERSION3_5_24V || BOARD_VERSION3_6_24V)
+        default 48 if BOARD_VERSION3_5_48V
+        default 56 if BOARD_VERSION3_6_56V
+
+
+    choice
+        prompt "USB protocol config"
+        default USB_PROTOCOL_NATIVE
+    
+        config USB_PROTOCOL_NATIVE
+            bool "native"
+    
+        config USB_PROTOCOL_NATIVE_STREAM_BASED
+            bool "native-stream"
+    
+        config USB_PROTOCOL_STDOUT
+            bool "stdout"
+    
+        config USB_PROTOCOL_NONE
+            bool "none"
+    
+    endchoice
+
+    choice
+        prompt "UART protocol config"
+        default UART_PROTOCOL_ASCII
+    
+        config UART_PROTOCOL_NATIVE
+            bool "native"
+    
+        config UART_PROTOCOL_ASCII
+            bool "ascii"
+    
+        config UART_PROTOCOL_STDOUT
+            bool "stdout"
+    
+        config UART_PROTOCOL_NONE
+            bool "none"
+    
+    endchoice
+
+    config USE_GPIO_MODE_STEP_DIR
+        bool "Step/dir mode config"
+        depends on UART_PROTOCOL_NONE
+
+endmenu
