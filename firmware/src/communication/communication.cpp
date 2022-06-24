@@ -49,7 +49,7 @@ void init_communication(void) {
     //osThreadDef(task_cmd_parse, communication_task, osPriorityNormal, 0, stack_size_comm_thread / sizeof(StackType_t));
     //comm_thread = osThreadCreate(osThread(task_cmd_parse), NULL);
 
-    comm_thread = rt_thread_create("task_cmd_parse", communication_task, RT_NULL, stack_size_comm_thread, COMM_THREAD_PRIO, 10);
+    comm_thread = rt_thread_create("comm", communication_task, RT_NULL, stack_size_comm_thread, COMM_THREAD_PRIO, 10);
     rt_thread_startup(comm_thread);
 
     while (!endpoint_list_valid)
