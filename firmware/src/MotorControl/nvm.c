@@ -375,6 +375,7 @@ int NVM_commit(void) {
 
 //#include <cmsis_os.h>
 #include <rtthread.h>
+#include <stdio.h>
 /** @brief Call this at startup to test/demo the NVM driver
 
  Expected output when starting with a fully erased NVM
