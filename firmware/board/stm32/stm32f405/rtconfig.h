@@ -21,7 +21,6 @@
 
 /* end of kservice optimization */
 #define RT_DEBUG
-#define RT_DEBUG_COLOR
 
 /* Inter-Thread communication */
 
@@ -41,9 +40,6 @@
 /* Kernel Device Object */
 
 #define RT_USING_DEVICE
-#define RT_USING_CONSOLE
-#define RT_CONSOLEBUF_SIZE 128
-#define RT_CONSOLE_DEVICE_NAME "uart2"
 /* end of Kernel Device Object */
 #define RT_VER_NUM 0x40100
 /* end of RT-Thread Kernel */
@@ -129,28 +125,10 @@
 
 /* language packages */
 
-/* JSON: JavaScript Object Notation, a lightweight data-interchange format */
-
-/* end of JSON: JavaScript Object Notation, a lightweight data-interchange format */
-
-/* XML: Extensible Markup Language */
-
-/* end of XML: Extensible Markup Language */
 /* end of language packages */
 
 /* multimedia packages */
 
-/* LVGL: powerful and easy-to-use embedded GUI library */
-
-/* end of LVGL: powerful and easy-to-use embedded GUI library */
-
-/* u8g2: a monochrome graphic library */
-
-/* end of u8g2: a monochrome graphic library */
-
-/* PainterEngine: A cross-platform graphics application framework written in C language */
-
-/* end of PainterEngine: A cross-platform graphics application framework written in C language */
 /* end of multimedia packages */
 
 /* tools packages */
@@ -159,48 +137,18 @@
 
 /* system packages */
 
-/* enhanced kernel services */
-
-/* end of enhanced kernel services */
-
-/* POSIX extension functions */
-
-/* end of POSIX extension functions */
-
-/* acceleration: Assembly language or algorithmic acceleration packages */
-
-/* end of acceleration: Assembly language or algorithmic acceleration packages */
-
-/* CMSIS: ARM Cortex-M Microcontroller Software Interface Standard */
-
-/* end of CMSIS: ARM Cortex-M Microcontroller Software Interface Standard */
-
-/* Micrium: Micrium software products porting for RT-Thread */
-
-/* end of Micrium: Micrium software products porting for RT-Thread */
 /* end of system packages */
 
 /* peripheral libraries and drivers */
 
 /* end of peripheral libraries and drivers */
 
-/* AI packages */
-
-/* end of AI packages */
-
 /* miscellaneous packages */
 
-/* project laboratory */
-
-/* end of project laboratory */
 
 /* samples: kernel and components samples */
 
 /* end of samples: kernel and components samples */
-
-/* entertainment: terminal games and other interesting software packages */
-
-/* end of entertainment: terminal games and other interesting software packages */
 /* end of miscellaneous packages */
 /* end of RT-Thread online packages */
 #define SOC_FAMILY_STM32
@@ -215,7 +163,6 @@
 /* On-chip Peripheral Drivers */
 
 #define BSP_USING_UART
-#define BSP_USING_UART2
 #define BSP_USING_UART4
 #define BSP_UART4_RX_USING_DMA
 #define BSP_UART4_TX_USING_DMA
