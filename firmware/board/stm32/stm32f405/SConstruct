@@ -9,7 +9,7 @@ else:
 
 RTT_ROOT = os.path.normpath(os.getcwd() + '/../../../../rt-thread')
 
-sys.path = sys.path + [os.path.join(RTT_ROOT, 'tools')]
+sys.path = [os.path.join(RTT_ROOT, 'tools')] + sys.path
 try:
     from building import *
 except:
