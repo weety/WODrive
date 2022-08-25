@@ -73,5 +73,13 @@ menu "WODrive BOARD config"
     config USE_GPIO_MODE_STEP_DIR
         bool "Step/dir mode config"
         depends on UART_PROTOCOL_NONE
+    
+    config USE_I2C_INTERFACE
+        bool "USE I2C interface for communication"
+        default n
+
+    config USE_CAN_INTERFACE
+        bool "USE CAN interface for communication"
+        default y
 
 endmenu

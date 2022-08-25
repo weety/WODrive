@@ -180,6 +180,8 @@
 #define HW_VERSION_VOLTAGE 24
 #define USB_PROTOCOL_NATIVE
 #define UART_PROTOCOL_ASCII
+#define USE_I2C_INTERFACE
+#define USE_CAN_INTERFACE
 /* end of WODrive BOARD config */
 
 #endif

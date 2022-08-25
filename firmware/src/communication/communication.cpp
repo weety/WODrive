@@ -70,10 +70,15 @@ void communication_task(void * ctx) {
     
     start_uart_server();
     start_usb_server();
+
     if (odrv.config_.enable_i2c_instead_of_can) {
+    #ifdef USE_I2C_INTERFACE
         start_i2c_server();
+    #endif
     } else {
+    #ifdef USE_CAN_INTERFACE
         odCAN->start_can_server();
+    #endif
     }
 
     for (;;) {

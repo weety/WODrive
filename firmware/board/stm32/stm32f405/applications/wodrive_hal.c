@@ -73,6 +73,13 @@ void early_start_checks(void) { // TODO: only implement for stm serials, now not
   }
 }
 
+int board_check_dfu(void)
+{
+  early_start_checks();
+  return 0;
+}
+INIT_BOARD_EXPORT(board_check_dfu);
+
 #if 0
 /**
   * @brief  This function is executed in case of error occurrence.

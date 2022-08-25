@@ -93,19 +93,22 @@ MotorControl/controller.cpp
 MotorControl/sensorless_estimator.cpp
 MotorControl/trapTraj.cpp
 MotorControl/main.cpp
-communication/can_simple.cpp
 communication/communication.cpp
 communication/ascii_protocol.cpp
 communication/interface_uart.cpp
 communication/interface_usb.cpp
-communication/interface_can.cpp
-communication/interface_i2c.cpp
 fibre/cpp/protocol.cpp
 autogen/version.c
 HMI/hmi.cpp
 HMI/LCD/ST7789.c
 HMI/LCD/lcd.cpp
 ''')
+
+if GetDepend('USE_I2C_INTERFACE'):
+    src += ['communication/interface_i2c.cpp']
+
+if GetDepend('USE_CAN_INTERFACE'):
+    src += ['communication/can_simple.cpp', 'communication/interface_can.cpp']
 
 CPPPATH = [cwd + '/Drivers/DRV8301']
 CPPPATH += [cwd + '/MotorControl']

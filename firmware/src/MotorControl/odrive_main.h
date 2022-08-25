@@ -11,7 +11,9 @@
 #ifdef __cplusplus
 #include <fibre/protocol.hpp>
 #include <communication/interface_usb.h>
+#ifdef USE_I2C_INTERFACE
 #include <communication/interface_i2c.h>
+#endif
 extern "C" {
 #endif
 
@@ -88,7 +90,9 @@ typedef struct {
     uint32_t stack_usage_can;
 
     USBStats_t& usb = usb_stats_;
+#ifdef USE_I2C_INTERFACE
     I2CStats_t& i2c = i2c_stats_;
+#endif
 } SystemStats_t;
 
 struct PWMMapping_t {

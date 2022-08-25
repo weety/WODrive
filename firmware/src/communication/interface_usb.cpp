@@ -196,7 +196,7 @@ void start_usb_server() {
     // Start USB communication thread
     //osThreadDef(usb_server_thread_def, usb_server_thread, osPriorityNormal, 0, stack_size_usb_thread / sizeof(StackType_t));
     //usb_thread = osThreadCreate(osThread(usb_server_thread_def), NULL);
-    usb_thread = rt_thread_create("usb_server_thread_def", usb_server_thread, RT_NULL, stack_size_usb_thread, COMM_THREAD_PRIO, 10);
+    usb_thread = rt_thread_create("usb_server", usb_server_thread, RT_NULL, stack_size_usb_thread, COMM_THREAD_PRIO, 10);
     rt_thread_startup(usb_thread);
 
 }

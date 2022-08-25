@@ -152,14 +152,18 @@ extern "C" int construct_objects() {
 
         //osDelay(1);
         rt_thread_mdelay(1);
+    #ifdef USE_I2C_INTERFACE
         i2c_stats_.addr = (0xD << 3);
         i2c_stats_.addr |= HAL_GPIO_ReadPin(I2C_A0_PORT, I2C_A0_PIN) != GPIO_PIN_RESET ? 0x1 : 0;
         i2c_stats_.addr |= HAL_GPIO_ReadPin(I2C_A1_PORT, I2C_A1_PIN) != GPIO_PIN_RESET ? 0x2 : 0;
         i2c_stats_.addr |= HAL_GPIO_ReadPin(I2C_A2_PORT, I2C_A2_PIN) != GPIO_PIN_RESET ? 0x4 : 0;
         MX_I2C1_Init(i2c_stats_.addr);
+    #endif
     } else
 #endif
+    #ifdef USE_CAN_INTERFACE
         MX_CAN1_Init();
+    #endif
 
     //HAL_UART_DeInit(&huart4);
     //huart4.Init.BaudRate = odrv.config_.uart_baudrate;
