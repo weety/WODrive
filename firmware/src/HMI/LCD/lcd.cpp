@@ -1,6 +1,6 @@
 #include <lcd.hpp>
 
-#include "..\communication\interface_uart.h"
+#include "interface_uart.h"
 
 LCD::LCD() {
     LCD_TypeDef LCD_InitStruct = {

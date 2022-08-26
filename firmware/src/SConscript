@@ -115,6 +115,7 @@ CPPPATH += [cwd + '/MotorControl']
 CPPPATH += [cwd + '/fibre/cpp/include']
 CPPPATH += [cwd + '/HMI']
 CPPPATH += [cwd + '/HMI/LCD']
+CPPPATH += [cwd + '/communication']
 CPPPATH += [cwd]
 
 group = DefineGroup('WODrive', src, depend = [''], CPPPATH = CPPPATH)

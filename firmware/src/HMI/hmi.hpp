@@ -2,7 +2,7 @@
 #define _HMI_HPP_
 #include <stdlib.h>
 
-#include "HMI\LCD\lcd.hpp"
+#include "lcd.hpp"
 #include "odrive_main.h"
 
 #define EVENT_HMI_UPDATE		(1<<0)
